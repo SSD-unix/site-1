@@ -1,1 +1,188 @@
-<!doctype html> <html lang="en"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width,initial-scale=1" /> <title>Curcle 1-Real — AI Demo</title> <style> :root{ --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent-1:#7c3aed; --accent-2:#06b6d4; --glass: rgba(255,255,255,0.04); --radius:16px; --max-width:1100px; --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; } *{box-sizing:border-box} html,body{height:100%;margin:0} body{ font-family:var(--sans); background: radial-gradient(800px 400px at 10% 10%, rgba(124,58,237,0.12), transparent 6%), radial-gradient(650px 300px at 95% 90%, rgba(6,182,212,0.08), transparent 8%), var(--bg); color:#e6eef6; padding:40px 20px; display:flex; justify-content:center; } .wrap{width:100%;max-width:var(--max-width);} header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:10px;flex-wrap:wrap} .brand{display:flex;align-items:center;gap:12px} .logo{ width:56px;height:56px;border-radius:14px; background:linear-gradient(135deg,var(--accent-1),var(--accent-2)); display:flex;align-items:center;justify-content:center; font-weight:700;font-family:monospace; box-shadow:0 6px 18px rgba(2,6,23,0.6); } nav{display:flex;gap:10px;align-items:center} .btn{ background:var(--glass);border:1px solid rgba(255,255,255,0.04); padding:8px 14px;border-radius:12px;color:inherit;cursor:pointer; } main{display:grid;grid-template-columns:1fr 380px;gap:22px} @media(max-width:980px){main{grid-template-columns:1fr}} .hero{ background:rgba(255,255,255,0.02); padding:28px;border-radius:var(--radius); border:1px solid rgba(255,255,255,0.05); } .hero h2{margin:0 0 10px;font-size:28px} .hero p{color:var(--muted);margin:0 0 18px} .iframe-wrap{ margin-top:18px;border-radius:12px;overflow:hidden; border:1px solid rgba(255,255,255,0.05); } iframe{width:100%;height:500px;border:0;background:white} .profile{ background:rgba(255,255,255,0.02); padding:18px;border-radius:14px; border:1px solid rgba(255,255,255,0.03); } .profile h3{margin:0 0 10px} .muted{color:var(--muted)} footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px} </style> </head> <body> <div class="wrap"> <header> <div class="brand"> <div class="logo">AI</div> <div> <h1 id="title">Curcle 1-Real</h1> <p id="subtitle">Intelligent AI model demo</p> </div> </div> <nav> <select id="lang" class="btn"> <option value="en">English</option> <option value="ru">Русский</option> <option value="hy">Հայերեն</option> </select> </nav> </header> <main> <section class="hero"> <h2 id="hero-title">Meet Curcle 1-Real</h2> <p id="hero-desc">Friendly AI for reasoning, coding, and creative tasks.</p> <div class="iframe-wrap"> <iframe src="https://chat.openai.com/" title="AI chat"></iframe> </div> </section> <aside class="profile"> <h3 id="about-title">About this AI</h3> <p><strong>Model:</strong> Curcle 1-Real</p> <p id="about-text" class="muted">Low latency, clear answers, multi-language support.</p> </aside> </main> <footer> <div id="footer-text">Made with Curcle 1-Real • Single-file demo</div> </footer> </div> <script> const texts = { en:{ title:"Curcle 1-Real", subtitle:"Intelligent AI model demo", heroTitle:"Meet Curcle 1-Real", heroDesc:"Friendly AI for reasoning, coding, and creative tasks.", aboutTitle:"About this AI", aboutText:"Low latency, clear answers, multi-language support.", footer:"Made with Curcle 1-Real • Single-file demo" }, ru:{ title:"Curcle 1-Real", subtitle:"Демонстрация интеллектуальной модели ИИ", heroTitle:"Познакомьтесь с Curcle 1-Real", heroDesc:"Дружелюбный ИИ для рассуждений, программирования и творчества.", aboutTitle:"О модели", aboutText:"Низкая задержка, четкие ответы, поддержка нескольких языков.", footer:"Сделано с Curcle 1-Real • Однофайловый демо" }, hy:{ title:"Curcle 1-Real", subtitle:"Բազմաֆունկցիոնալ ԱԻ ցուցադրություն", heroTitle:"Ծանոթացեք Curcle 1-Real-ին", heroDesc:"Բարեկամական ԱԻ՝ տրամաբանության, ծրագրավորման և ստեղծարարության համար։", aboutTitle:"Մոդելի մասին", aboutText:"Ցածր ուշացում, հստակ պատասխաններ, բազմալեզու աջակցություն։", footer:"Ստեղծված է Curcle 1-Real-ով • Մեկ ֆայլի ցուցադրություն" } }; const langSel=document.getElementById("lang"); function setLang(l){ const t=texts[l]; document.getElementById("title").textContent=t.title; document.getElementById("subtitle").textContent=t.subtitle; document.getElementById("hero-title").textContent=t.heroTitle; document.getElementById("hero-desc").textContent=t.heroDesc; document.getElementById("about-title").textContent=t.aboutTitle; document.getElementById("about-text").textContent=t.aboutText; document.getElementById("footer-text").textContent=t.footer; } langSel.addEventListener("change",()=>setLang(langSel.value)); setLang("en"); </script> </body> </html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Curcle AI</title>
+
+  <style>
+    :root {
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa4b2;
+      --accent-1:#7c3aed;
+      --accent-2:#06b6d4;
+      --glass: rgba(255,255,255,0.04);
+      --text:#e6eef6;
+      --radius:16px;
+      --max-width:1100px;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    /* Светлая тема */
+    .light {
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --muted:#475569;
+      --accent-1:#7c3aed;
+      --accent-2:#06b6d4;
+      --glass: rgba(0,0,0,0.04);
+      --text:#1e293b;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      font-family:var(--sans);
+      background: radial-gradient(800px 400px at 10% 10%, rgba(124,58,237,0.12), transparent 6%),
+                  radial-gradient(650px 300px at 95% 90%, rgba(6,182,212,0.08), transparent 8%),
+                  var(--bg);
+      color:var(--text);
+      padding:40px 20px;
+      display:flex;
+      justify-content:center;
+      transition: background 0.4s, color 0.4s;
+    }
+    .wrap{width:100%;max-width:var(--max-width);}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:10px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:56px;height:56px;border-radius:14px;
+      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-family:monospace;
+      box-shadow:0 6px 18px rgba(2,6,23,0.6);
+      color:white;
+    }
+    nav{display:flex;gap:10px;align-items:center}
+    .btn{
+      background:var(--glass);
+      border:1px solid rgba(255,255,255,0.1);
+      padding:8px 14px;
+      border-radius:12px;
+      color:inherit;
+      cursor:pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    main{display:grid;grid-template-columns:1fr 380px;gap:22px}
+    @media(max-width:980px){main{grid-template-columns:1fr}}
+    .hero{
+      background:rgba(255,255,255,0.02);
+      padding:28px;
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    .hero h2{margin:0 0 10px;font-size:28px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .iframe-wrap{
+      margin-top:18px;
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    iframe{width:100%;height:500px;border:0;background:white}
+    .profile{
+      background:rgba(255,255,255,0.02);
+      padding:18px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .profile h3{margin:0 0 10px}
+    .muted{color:var(--muted)}
+    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">AI</div>
+        <div>
+          <h1 id="title">Curcle 1-Real</h1>
+          <p id="subtitle">Intelligent AI model demo</p>
+        </div>
+      </div>
+      <nav>
+        <select id="lang" class="btn">
+          <option value="en">English</option>
+          <option value="ru">Русский</option>
+          <option value="hy">Հայերեն</option>
+        </select>
+        <button id="themeToggle" class="btn">🌙</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h2 id="hero-title">Meet Curcle 1-Real</h2>
+        <p id="hero-desc">Friendly AI for reasoning, coding, and creative tasks.</p>
+        <div class="iframe-wrap">
+          <iframe src="https://chat.openai.com/" title="AI chat"></iframe>
+        </div>
+      </section>
+
+      <aside class="profile">
+        <h3 id="about-title">About this AI</h3>
+        <p><strong>Model:</strong> Curcle 1-Real</p>
+        <p id="about-text" class="muted">Low latency, clear answers, multi-language support.</p>
+      </aside>
+    </main>
+
+    <footer>
+      <div id="footer-text">Made with Curcle 1-Real • Single-file demo</div>
+    </footer>
+  </div>
+
+  <script>
+    const texts = {
+      en:{
+        title:"Curcle 1-Real",
+        subtitle:"Intelligent AI model demo",
+        heroTitle:"Meet Curcle 1-Real",
+        heroDesc:"Friendly AI for reasoning, coding, and creative tasks.",
+        aboutTitle:"About this AI",
+        aboutText:"Low latency, clear answers, multi-language support.",
+        footer:"Made with Curcle 1-Real • Single-file demo"
+      },
+      ru:{
+        title:"Curcle 1-Real",
+        subtitle:"Демонстрация интеллектуальной модели ИИ",
+        heroTitle:"Познакомьтесь с Curcle 1-Real",
+        heroDesc:"Дружелюбный ИИ для рассуждений, программирования и творчества.",
+        aboutTitle:"О модели",
+        aboutText:"Низкая задержка, четкие ответы, поддержка нескольких языков.",
+        footer:"Сделано с Curcle 1-Real • Однофайловый демо"
+      },
+      hy:{
+        title:"Curcle 1-Real",
+        subtitle:"Բազմաֆունկցիոնալ ԱԻ ցուցադրություն",
+        heroTitle:"Ծանոթացեք Curcle 1-Real-ին",
+        heroDesc:"Բարեկամական ԱԻ՝ տրամաբանության, ծրագրավորման և ստեղծարարության համար։",
+        aboutTitle:"Մոդելի մասին",
+        aboutText:"Ցածր ուշացում, հստակ պատասխաններ, բազմալեզու աջակցություն։",
+        footer:"Ստեղծված է Curcle 1-Real-ով • Մեկ ֆայլի ցուցադրություն"
+      }
+    };
+
+    const langSel=document.getElementById("lang");
+    function setLang(l){
+      const t=texts[l];
+      document.getElementById("title").textContent=t.title;
+      document.getElementById("subtitle").textContent=t.subtitle;
+      document.getElementById("hero-title").textContent=t.heroTitle;
+      document.getElementById("hero-desc").textContent=t.heroDesc;
+      document.getElementById("about-title").textContent=t.aboutTitle;
+      document.getElementById("about-text").textContent=t.aboutText;
+      document.getElementById("footer-text").textContent=t.footer;
+    }
+    langSel.addEventListener("change",()=>setLang(langSel.value));
+    setLang("en");
+
+    // Переключатель темы
+    const btn = document.getElementById("themeToggle");
+    btn.addEventListener("click",()=>{
+      document.body.classList.toggle("light");
+      btn.textContent = document.body.classList.contains("light") ? "☀️" : "🌙";
+    });
+  </script>
+</body>
+</html>
