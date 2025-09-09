@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AI — GPT-5 Thinking mini — Demo</title>
+  <title>Curcle 1-Real — AI Demo</title>
 
   <style>
     :root{
@@ -15,220 +15,58 @@
       --glass: rgba(255,255,255,0.04);
       --radius:16px;
       --max-width:1100px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
       --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-
-    /* Reset + base */
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html,body{height:100%;margin:0}
     body{
-      margin:0;
       font-family:var(--sans);
       background:
         radial-gradient(800px 400px at 10% 10%, rgba(124,58,237,0.12), transparent 6%),
         radial-gradient(650px 300px at 95% 90%, rgba(6,182,212,0.08), transparent 8%),
         var(--bg);
       color:#e6eef6;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:48px 20px;
+      padding:40px 20px;
       display:flex;
-      align-items:flex-start;
       justify-content:center;
     }
-
-    .wrap{
-      width:100%;
-      max-width:var(--max-width);
-    }
-
-    header{
-      display:flex;
-      gap:18px;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:28px;
-    }
-
-    .brand{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
+    .wrap{width:100%;max-width:var(--max-width);}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:10px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:12px}
     .logo{
-      width:56px;
-      height:56px;
-      border-radius:14px;
+      width:56px;height:56px;border-radius:14px;
       background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-family:monospace;
       box-shadow:0 6px 18px rgba(2,6,23,0.6);
-      font-family:var(--mono);
     }
-    .brand h1{
-      margin:0;
-      font-size:18px;
-      letter-spacing:0.2px;
-    }
-    .brand p{margin:0;font-size:12px;color:var(--muted)}
-
-    nav{display:flex; gap:10px; align-items:center;}
+    nav{display:flex;gap:10px;align-items:center}
     .btn{
-      background:var(--glass);
-      border:1px solid rgba(255,255,255,0.04);
-      padding:10px 14px;
-      border-radius:12px;
-      color:inherit;
-      cursor:pointer;
-      font-size:14px;
-      transition:transform .14s ease, background .14s ease;
+      background:var(--glass);border:1px solid rgba(255,255,255,0.04);
+      padding:8px 14px;border-radius:12px;color:inherit;cursor:pointer;
     }
-    .btn:hover{ transform:translateY(-3px) }
-
-    /* main grid */
-    main{
-      display:grid;
-      grid-template-columns: 1fr 420px;
-      gap:22px;
-    }
-
-    @media (max-width:980px){
-      main{ grid-template-columns: 1fr; }
-      header{ gap:10px; flex-direction:column; align-items:flex-start }
-    }
-
+    main{display:grid;grid-template-columns:1fr 380px;gap:22px}
+    @media(max-width:980px){main{grid-template-columns:1fr}}
     .hero{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border-radius: var(--radius);
-      padding:28px;
-      box-shadow: 0 8px 30px rgba(2,8,23,0.6);
-      border:1px solid rgba(255,255,255,0.03);
-      position:relative;
+      background:rgba(255,255,255,0.02);
+      padding:28px;border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,0.05);
     }
-
-    .hero h2{
-      margin:0 0 8px 0;
-      font-size:28px;
-      line-height:1.02;
-    }
-    .hero p{ margin:0 0 18px 0; color:var(--muted) }
-
-    .feature-grid{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:12px;
-      margin-top:14px;
-    }
-    @media (max-width:560px){ .feature-grid{ grid-template-columns: 1fr } }
-
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.012), transparent);
-      border-radius:12px;
-      padding:12px;
-      border:1px solid rgba(255,255,255,0.025);
-    }
-    .card h3{ margin:0 0 8px 0; font-size:13px }
-    .card p{ margin:0; font-size:13px; color:var(--muted) }
-
-    .sidebar{
-      position:sticky;
-      top:24px;
-      align-self:start;
-    }
-    .profile{
-      background: linear-gradient(135deg, rgba(255,255,255,0.02), transparent);
-      padding:18px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.03);
-    }
-    .profile .title{ font-size:13px; color:var(--muted); margin-bottom:6px }
-    .model-name{ font-weight:700; font-size:18px; margin:0 0 8px 0 }
-    .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px }
-    .badge{
-      padding:6px 10px;border-radius:999px;font-size:12px;
-      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.02)
-    }
-
-    .meta{ font-size:13px; color:var(--muted); margin-bottom:10px }
-    .cta-row{ display:flex; gap:10px; margin-top:10px }
-
-    /* iframe card */
+    .hero h2{margin:0 0 10px;font-size:28px}
+    .hero p{color:var(--muted);margin:0 0 18px}
     .iframe-wrap{
-      margin-top:18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-      border-radius:12px;
-      overflow:hidden;
+      margin-top:18px;border-radius:12px;overflow:hidden;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    iframe{width:100%;height:500px;border:0;background:white}
+    .profile{
+      background:rgba(255,255,255,0.02);
+      padding:18px;border-radius:14px;
       border:1px solid rgba(255,255,255,0.03);
-      display:flex;
-      flex-direction:column;
-      min-height:260px;
     }
-    .iframe-controls{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      padding:10px;
-      background: rgba(255,255,255,0.02);
-      border-bottom:1px solid rgba(255,255,255,0.01);
-    }
-    .iframe-controls input[type="text"]{
-      flex:1;
-      padding:8px 10px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,0.03);
-      background:transparent;
-      color:inherit;
-      outline:none;
-    }
-    .iframe-controls .small{ font-size:12px; color:var(--muted) }
-
-    iframe{
-      width:100%;
-      height:480px;
-      border:0;
-      background:white;
-    }
-
-    /* footer / credits */
-    footer{
-      margin-top:20px;
-      color:var(--muted);
-      font-size:13px;
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-
-    /* little animated accent */
-    .sparkle{
-      position:absolute;
-      right:18px;
-      top:-20px;
-      width:140px;
-      height:120px;
-      background: conic-gradient(from 120deg at 50% 50%, rgba(124,58,237,0.12), rgba(6,182,212,0.08), transparent 60%);
-      filter:blur(18px);
-      transform: rotate(12deg);
-      border-radius:18px;
-      pointer-events:none;
-      opacity:0.9;
-    }
-
-    /* small utilities */
-    .muted{ color:var(--muted) }
-    a.link{ color:var(--accent-2); text-decoration:none; font-weight:600 }
-    .center{ display:flex; align-items:center; justify-content:center }
-    .dot{ width:8px; height:8px; border-radius:99px; background:var(--accent-2); display:inline-block; margin-right:8px }
-    .small-note{ font-size:12px; color:var(--muted) }
-
-    /* nice hover for cards */
-    .card:hover{ transform: translateY(-6px); transition:transform .18s ease; }
+    .profile h3{margin:0 0 10px}
+    .muted{color:var(--muted)}
+    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
   </style>
 </head>
 <body>
@@ -237,205 +75,83 @@
       <div class="brand">
         <div class="logo">AI</div>
         <div>
-          <h1>AI Studio — GPT Showcase</h1>
-          <p>Simple single-file landing page with embedded chat iframe</p>
+          <h1 id="title">Curcle 1-Real</h1>
+          <p id="subtitle">Intelligent AI model demo</p>
         </div>
       </div>
-
       <nav>
-        <button class="btn" id="themeBtn" title="Toggle theme (visual)">Toggle Glow</button>
-        <a class="btn" href="#chat" role="button">Open Chat</a>
+        <select id="lang" class="btn">
+          <option value="en">English</option>
+          <option value="ru">Русский</option>
+          <option value="hy">Հայերեն</option>
+        </select>
       </nav>
     </header>
 
     <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="sparkle" aria-hidden="true"></div>
-
-        <h2 id="hero-title">Meet <span style="background:linear-gradient(90deg,var(--accent-1),var(--accent-2)); -webkit-background-clip:text; color:transparent">GPT-5 Thinking mini</span></h2>
-        <p>Friendly, fast, and built for reasoning. This page demonstrates an informational landing page for an AI and includes an embeddable iframe for an AI chat site. Replace the iframe URL with your preferred chat URL if needed.</p>
-
-        <div class="feature-grid" role="list">
-          <div class="card" role="listitem">
-            <h3>Core capabilities</h3>
-            <p>Text understanding, multi-turn conversation, code assistance, summarization, translations, and creative writing — optimized for helpful reasoning tasks.</p>
-          </div>
-
-          <div class="card" role="listitem">
-            <h3>Usage</h3>
-            <p>Use as a knowledge assistant, developer helper, content composer, or brainstorming partner. Designed for clarity and compositional reasoning.</p>
-          </div>
-
-          <div class="card" role="listitem">
-            <h3>Privacy & Safety</h3>
-            <p>Don't share secrets or private keys. Treat responses as helpful suggestions, not legal/medical/financial advice.</p>
-          </div>
-
-          <div class="card" role="listitem">
-            <h3>Integration</h3>
-            <p>Works via APIs and web chat UIs. Embed in your apps or point the iframe below to any allowed chat endpoint.</p>
-          </div>
+      <section class="hero">
+        <h2 id="hero-title">Meet Curcle 1-Real</h2>
+        <p id="hero-desc">Friendly AI for reasoning, coding, and creative tasks.</p>
+        <div class="iframe-wrap">
+          <iframe src="https://chat.openai.com/" title="AI chat"></iframe>
         </div>
-
-        <div class="card" style="margin-top:16px;">
-          <h3>Quick facts</h3>
-          <p class="muted" style="margin-top:6px;">
-            Model: <strong>GPT-5 Thinking mini</strong> • Response style: helpful, concise • Local-first demo: single HTML file
-          </p>
-        </div>
-
-        <div class="iframe-wrap" id="chat" style="margin-top:18px;">
-          <div class="iframe-controls">
-            <input id="iframeUrl" type="text" value="https://chat.openai.com/" aria-label="Chat iframe url" />
-            <button class="btn" id="loadBtn">Load</button>
-            <button class="btn" id="openBtn">Open in new tab</button>
-            <div style="width:12px"></div>
-            <span class="small muted">Tip: if the site blocks embedding, open it in a new tab.</span>
-          </div>
-
-          <div id="iframeHolder" style="flex:1; min-height:260px;">
-            <iframe id="chatIfr" src="https://chat.openai.com/" title="AI chat iframe"></iframe>
-            <div id="iframeFallback" style="display:none; padding:22px;" class="card">
-              <h3>Iframe failed to load</h3>
-              <p class="muted">Many chat websites disallow embedding for security (they send headers like <code>X-Frame-Options: DENY</code> or use CSP frame-ancestors). Use the button to open the site in a new tab, or change the URL above to a site that allows embedding.</p>
-              <p><a id="fallbackLink" class="link" href="#" target="_blank" rel="noopener">Open chat in new tab</a></p>
-            </div>
-          </div>
-        </div>
-
       </section>
 
-      <aside class="sidebar">
-        <div class="profile card" aria-labelledby="profileTitle">
-          <div class="title" id="profileTitle">About this AI</div>
-          <div class="model-name">GPT-5 Thinking mini</div>
-
-          <div class="badges" aria-hidden="true">
-            <div class="badge">Reasoning</div>
-            <div class="badge">Coding</div>
-            <div class="badge">Conversational</div>
-            <div class="badge">Creative</div>
-          </div>
-
-          <div class="meta">
-            <div><strong>Latency:</strong> low (demo)</div>
-            <div><strong>Output style:</strong> instructive & concise</div>
-          </div>
-
-          <div class="cta-row">
-            <button class="btn" id="copyInfoBtn" title="Copy AI info">Copy Info</button>
-            <a class="btn" id="moreBtn" href="#" onclick="alert('This is a demo single-file page — customize links to your API or docs.');return false;">Docs</a>
-          </div>
-
-          <p class="small-note" style="margin-top:12px;">Note: If you customize this page for production, point the iframe to a self-hosted chat UI that allows embedding, or remove the iframe and use an API-backed chat implementation.</p>
-        </div>
-
-        <div class="card" style="margin-top:12px;">
-          <h3>Developer note</h3>
-          <p class="muted">All markup, styles and behaviour are contained in this single file. Copy + edit to suit your use-case. Replace default iframe URL if needed.</p>
-        </div>
+      <aside class="profile">
+        <h3 id="about-title">About this AI</h3>
+        <p><strong>Model:</strong> Curcle 1-Real</p>
+        <p id="about-text" class="muted">Low latency, clear answers, multi-language support.</p>
       </aside>
     </main>
 
     <footer>
-      <div>Made with <span class="dot" aria-hidden="true"></span> <strong>GPT-5 Thinking mini</strong></div>
-      <div class="muted">Single-file demo • <a class="link" href="#" onclick="alert('Replace with your own privacy policy link.');return false;">Privacy</a></div>
+      <div id="footer-text">Made with Curcle 1-Real • Single-file demo</div>
     </footer>
   </div>
 
   <script>
-    // Minimal interactivity: load iframe, detect failure, quick copy
-    (function(){
-      const loadBtn = document.getElementById('loadBtn');
-      const openBtn = document.getElementById('openBtn');
-      const iframe = document.getElementById('chatIfr');
-      const iframeUrl = document.getElementById('iframeUrl');
-      const fallback = document.getElementById('iframeFallback');
-      const iframeHolder = document.getElementById('iframeHolder');
-      const fallbackLink = document.getElementById('fallbackLink');
-      const copyInfoBtn = document.getElementById('copyInfoBtn');
-      const themeBtn = document.getElementById('themeBtn');
-      let glow = true;
-
-      // Load the iframe from input
-      function loadFrame(url){
-        fallback.style.display='none';
-        iframe.style.display='block';
-        iframe.src = url;
-        fallbackLink.href = url;
-        // Some sites block embedding. We'll detect by listening for load and then checking contentWindow.
-        // Note: cross-origin access is restricted; we instead rely on a load timeout + visible dimensions.
-        let loaded = false;
-        const onload = ()=>{ loaded = true; cleanup(); };
-        function cleanup(){ iframe.removeEventListener('load', onload); clearTimeout(timer); }
-
-        iframe.addEventListener('load', onload);
-        const timer = setTimeout(()=>{
-          if(!loaded){
-            // assume blocked or slow — show fallback message
-            iframe.style.display='none';
-            fallback.style.display='block';
-          }
-        }, 1800); // 1.8s : best-effort detection
+    const texts = {
+      en:{
+        title:"Curcle 1-Real",
+        subtitle:"Intelligent AI model demo",
+        heroTitle:"Meet Curcle 1-Real",
+        heroDesc:"Friendly AI for reasoning, coding, and creative tasks.",
+        aboutTitle:"About this AI",
+        aboutText:"Low latency, clear answers, multi-language support.",
+        footer:"Made with Curcle 1-Real • Single-file demo"
+      },
+      ru:{
+        title:"Curcle 1-Real",
+        subtitle:"Демонстрация интеллектуальной модели ИИ",
+        heroTitle:"Познакомьтесь с Curcle 1-Real",
+        heroDesc:"Дружелюбный ИИ для рассуждений, программирования и творчества.",
+        aboutTitle:"О модели",
+        aboutText:"Низкая задержка, четкие ответы, поддержка нескольких языков.",
+        footer:"Сделано с Curcle 1-Real • Однофайловый демо"
+      },
+      hy:{
+        title:"Curcle 1-Real",
+        subtitle:"Բազմաֆունկցիոնալ ԱԻ ցուցադրություն",
+        heroTitle:"Ծանոթացեք Curcle 1-Real-ին",
+        heroDesc:"Բարեկամական ԱԻ՝ տրամաբանության, ծրագրավորման և ստեղծարարության համար։",
+        aboutTitle:"Մոդելի մասին",
+        aboutText:"Ցածր ուշացում, հստակ պատասխաններ, բազմալեզու աջակցություն։",
+        footer:"Ստեղծված է Curcle 1-Real-ով • Մեկ ֆայլի ցուցադրություն"
       }
-
-      loadBtn.addEventListener('click', ()=>{
-        const url = iframeUrl.value.trim();
-        if(!url) return alert('Please paste a URL for the chat iframe.');
-        // ensure proper scheme
-        const prefixed = url.match(/^https?:\/\//) ? url : 'https://' + url;
-        loadFrame(prefixed);
-      });
-
-      openBtn.addEventListener('click', ()=>{
-        const url = iframeUrl.value.trim() || iframe.src || 'https://chat.openai.com/';
-        const prefixed = url.match(/^https?:\/\//) ? url : 'https://' + url;
-        window.open(prefixed, '_blank', 'noopener');
-      });
-
-      // initial load
-      fallbackLink.href = iframe.src;
-
-      copyInfoBtn.addEventListener('click', async ()=>{
-        const info = "GPT-5 Thinking mini — demo AI: reasoning, coding, conversation. (Single-file demo page)";
-        try{
-          await navigator.clipboard.writeText(info);
-          copyInfoBtn.textContent = 'Copied!';
-          setTimeout(()=> copyInfoBtn.textContent = 'Copy Info',1200);
-        }catch(e){
-          alert('Copy failed — your browser may block clipboard access.');
-        }
-      });
-
-      // Theme glow toggle (simple)
-      themeBtn.addEventListener('click', ()=>{
-        glow = !glow;
-        if(glow){
-          document.documentElement.style.setProperty('--accent-1','#7c3aed');
-          document.documentElement.style.setProperty('--accent-2','#06b6d4');
-          themeBtn.textContent = 'Toggle Glow';
-        }else{
-          document.documentElement.style.setProperty('--accent-1','#555b6e');
-          document.documentElement.style.setProperty('--accent-2','#566573');
-          themeBtn.textContent = 'Toggle Glow';
-        }
-      });
-
-      // If iframe fails quickly (on some browsers we may get immediate load event), try to detect
-      iframe.addEventListener('error', ()=>{
-        iframe.style.display='none';
-        fallback.style.display='block';
-      });
-
-      // Small UX improvement: resize iframe height on mobile
-      function adjustIframeHeight(){
-        const w = window.innerWidth;
-        if(w < 700) iframe.style.height = '60vh';
-        else iframe.style.height = '480px';
-      }
-      window.addEventListener('resize', adjustIframeHeight);
-      adjustIframeHeight();
-    })();
+    };
+    const langSel=document.getElementById("lang");
+    function setLang(l){
+      const t=texts[l];
+      document.getElementById("title").textContent=t.title;
+      document.getElementById("subtitle").textContent=t.subtitle;
+      document.getElementById("hero-title").textContent=t.heroTitle;
+      document.getElementById("hero-desc").textContent=t.heroDesc;
+      document.getElementById("about-title").textContent=t.aboutTitle;
+      document.getElementById("about-text").textContent=t.aboutText;
+      document.getElementById("footer-text").textContent=t.footer;
+    }
+    langSel.addEventListener("change",()=>setLang(langSel.value));
+    setLang("en");
   </script>
 </body>
 </html>
