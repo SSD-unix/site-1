@@ -1,1 +1,65 @@
-<iframe src="https://smile-shaped-excellence-prisoner.trycloudflare.com"></iframe>
+<!doctype html>
+
+<html lang="hy">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SSDunix</title>
+  <style>
+    body{font-family:Inter,system-ui,Arial;margin:0;background:#0f172a;color:#e6eef8}
+    .container{max-width:980px;margin:36px auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    h1{margin:0;font-size:28px}
+    a{color:#7dd3fc}
+    .card{background:#071029;padding:18px;border-radius:12px;margin-top:18px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    footer{margin-top:30px;font-size:13px;color:#9fb0c8;text-align:center}
+    .meta{font-size:13px;color:#9fb0c8}
+    .repo{padding:10px;border-radius:8px;border:1px dashed rgba(255,255,255,0.03);margin:8px 0}
+    .muted{color:#9fb0c8;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>SSDunix</h1>
+      <nav class="meta">GitHub: <a href="https://github.com/SSD-unix" target="_blank">@SSD-unix</a></nav>
+    </header>
+
+<section class="card" id="about">
+  <h2>Ծրագրի մասին</h2>
+  <p>SSDunix — սա կայք է, որը նվիրված է իմ նախագծերին և մշակումներին։</p>
+  <p>Կարդացեք նաև նորություններ <a href="https://news.ssdunix.xyz" target="_blank">news.ssdunix.xyz</a> կայքում</p>
+</section>
+
+<section class="card" id="github">
+  <h2>GitHub պահոցներ</h2>
+  <div id="repos">Բեռնում...</div>
+
+  <script>
+    (async function(){
+      const container = document.getElementById('repos');
+      try{
+        const res = await fetch('https://api.github.com/users/SSD-unix/repos');
+        const repos = await res.json();
+        container.innerHTML = '';
+        repos.sort((a,b)=> new Date(b.updated_at)-new Date(a.updated_at));
+        repos.forEach(r=>{
+          const el = document.createElement('div'); el.className='repo';
+          el.innerHTML = `<strong><a href="${r.html_url}" target="_blank">${r.name}</a></strong>
+                          <div class="muted">${r.language || ''} — թարմացվել է: ${new Date(r.updated_at).toLocaleString()}</div>
+                          <div>${r.description || ''}</div>`;
+          container.appendChild(el);
+        });
+        if(repos.length===0) container.textContent='Պահոցներ չեն գտնվել։';
+      }catch(e){
+        container.textContent = 'Չհաջողվեց բեռնել պահոցները։';
+      }
+    })();
+  </script>
+</section>
+
+<footer>© SSDunix</footer>
+
+  </div>
+</body>
+</html>
